@@ -67,6 +67,15 @@ class fichier
         return $this->request($json, "file/info.cgi");
     }
 
+    public function av_scan($url)
+    {
+        $json = [
+            "url"       =>  $url,
+            "pretty"    =>  1
+        ];
+        return $this->request($json, "file/scan.cgi");
+    }
+
     public function folder_ls($folder_id)
     {
         $json = [
