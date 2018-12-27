@@ -23,7 +23,7 @@ $o->download("https://1fichier.com/?IIIIIIIDDDDDDDDD")
 ### checksum checking
 
 ```shell
-$ checksum ``openssl dgst -whirlpool * > all.checksum``
+$ openssl dgst -whirlpool * > all.checksum
 ```
 
 ```php
