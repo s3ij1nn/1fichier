@@ -76,6 +76,28 @@ class fichier
         return $this->request($json, "file/scan.cgi");
     }
 
+    public function file_rm($url)
+    {
+        $json = [
+            "url"   =>  $url
+        ];
+        return $this->request($json, "file/rm.cgi");
+    }
+
+    public function file_mv($urls, $folder_id)
+    {
+        if(!is_array($urls)){
+            $urls = [$urls];
+        }
+        $json = [
+            "pretty"                    =>  1,
+            "destination_folder_id"     =>  $folder_id,
+            "urls"                      =>  $urls
+        ];
+
+        return $this->request($json, "file/mv.cgi");
+    }
+
     public function folder_ls($folder_id)
     {
         $json = [
