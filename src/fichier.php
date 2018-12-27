@@ -58,6 +58,15 @@ class fichier
         return $this->request($json, "file/ls.cgi");
     }
 
+    public function file_info($url)
+    {
+        $json = [
+            "url"       =>  $url,
+            "pretty"    =>  1
+        ];
+        return $this->request($json, "file/info.cgi");
+    }
+
     public function folder_ls($folder_id)
     {
         $json = [
