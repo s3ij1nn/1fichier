@@ -15,7 +15,7 @@ $o->file_ls(0)
 // Root folder folder's list
 $o->folder_ls(0)
 
-// Get derect Download link (Premium, Access, CDN)
+// Get direct download link (Premium, Access, CDN)
 $o->download("https://1fichier.com/?IIIIIIIDDDDDDDDD")
 
 ```
