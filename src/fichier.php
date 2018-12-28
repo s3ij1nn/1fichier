@@ -121,6 +121,71 @@ class fichier
         return $this->request($json, "folder/ls.cgi");
     }
 
+    public function mkdir($name, $folder_id = false, $sharing_user = false)
+    {
+        $json = [
+           "name"                   =>  $name,
+        ];
+        if($folder_id){
+            $json["folder_id"]      =   $folder_id;
+        }
+        if($sharing_user){
+            $json["sharing_user"]   =   $sharing_user;
+        }
+
+        return $this->request($json, "folder/mkdir.cgi");
+    }
+
+    public function folder_share($folder_id, $share = 0, $pass = false, $shares = false)
+    {
+        $json = [
+            "folder_id"     =>  $folder_id,
+            "share"         =>  $share
+        ];
+        if($pass){
+            $json["pass"]   =   $pass;
+        }
+        if($shares){
+            $json["shares"] =   $shares;
+        }
+
+        return $this->request($json, "folder/share.cgi");
+    }
+
+    public function folder_share_gen($email, $rw = 0, $hide_links = 0, $add_array = false)
+    {
+        $json = [
+            "email"         =>  $email,
+            "rw"            =>  $rw,
+            "hide_links"    =>  $hide_links
+        ];
+        if(is_array($add_array)){
+            $array[] = $add_array;
+        }
+        $array[] = $json;
+        return $array;
+    }
+
+    public function folder_mv($folder_id, $destination_folder_id, $destination_user = false)
+    {
+        $json = [
+            "folder_id"                 =>  $folder_id,
+            "destination_folder_id"     =>  $destination_folder_id
+        ];
+        if($destination_user){
+            $json["destination_user"]   =   $destination_user;
+        }
+        return $this->request($json, "folder/mv.cgi");
+    }
+
+    public function folder_rm($folder_id)
+    {
+        $json = [
+            "folder_id"     =>  $folder_id
+        ];
+        return $this->request($json, "folder/rm.cgi");
+    }
+
     /**
      * checksum parser
      *
