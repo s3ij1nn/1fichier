@@ -63,4 +63,32 @@ Psy Shell v?.?.? (PHP ?.?.? — cli) by Justin Hileman
 >>> $o->file_ls(0)
 
 >>> $o->file_mv("https://1fichier.com/?0x0000000000000", 114514);
+
+>>> ls $o
+Class Properties: $error
+Class Methods: av_scan, checksum_check, checksum_parser, download, file_cp, file_info, file_ls, file_mv, file_rm, folder_ls, folder_mv, folder_rm, folder_share, folder_share_gen, mkdir, request, __construct
+
+// doc
+>>> doc $o->checksum_check
+public function checksum_check($filename, $folder_id, $verbose = false)
+
+Description:
+  checksum_check
+  
+  checksum file path and how to make checksum view checksum_parse doc
+  find checksum from folder
+  if find all checksum to return true
+  $verbose true to show OK or NOT
+  
+  When not find checksum return not fond file and checksum
+  return array format is same as checksum_parser
+
+Param:
+  $filename            
+  $folder_id           
+  bool        $verbose 
+
+Return:
+  array|bool 
+
 ```
