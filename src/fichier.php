@@ -261,6 +261,41 @@ class fichier
         return $this->request($json, "folder/rm.cgi");
     }
 
+    public function ftp_process()
+    {
+        $json = [
+            "pretty"        =>  1
+        ];
+        return $this->request($json, "ftp/process.cgi");
+    }
+
+    public function ftp_user_ls()
+    {
+        $json = [
+            "pretty"        =>  1
+        ];
+        return $this->request($json, "ftp/users/ls.cgi");
+    }
+
+    public function ftp_user_add($username, $password, $folder_id)
+    {
+        $json = [
+            "user"          =>  $username,
+            "pass"          =>  $password,
+            "folder_id"     =>  $folder_id
+        ];
+        return $this->request($json, "ftp/users/add.cgi");
+    }
+
+    public function ftp_user_rm($username)
+    {
+        $json = [
+            "user"          =>  $username
+        ];
+        return $this->request($json, "ftp/users/rm.cgi");
+    }
+
+
     /**
      * checksum parser
      *
