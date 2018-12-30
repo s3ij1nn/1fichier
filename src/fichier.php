@@ -68,7 +68,7 @@ class fichier
      * @param $folder_id
      * @return bool|mixed
      */
-    public function file_ls($folder_id)
+    public function file_ls($folder_id = 0)
     {
         $json = [
             "folder_id"     =>  $folder_id,
@@ -157,7 +157,7 @@ class fichier
      * @param $folder_id
      * @return bool|mixed
      */
-    public function folder_ls($folder_id)
+    public function folder_ls($folder_id = 0)
     {
         $json = [
             "folder_id"     =>  $folder_id,
