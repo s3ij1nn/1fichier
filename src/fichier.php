@@ -295,6 +295,33 @@ class fichier
         return $this->request($json, "ftp/users/rm.cgi");
     }
 
+    public function remote_ls()
+    {
+        $json = [
+            "pretty"        =>  1
+        ];
+        return $this->request($json, "remote/ls.cgi");
+    }
+
+    public function remote_info($id)
+    {
+        $json = [
+            "id"            =>  $id
+        ];
+        return $this->request($json, "remote/info.cgi");
+    }
+
+    public function remote_request($urls, $folder_id, $headers = false)
+    {
+        $json = [
+            "urls"          =>  $urls,
+            "folder_id"     =>  $folder_id,
+        ];
+        if($headers){
+            $json["headers"] = $headers;
+        }
+        return $this->request($json, "remote/request.cgi");
+    }
 
     /**
      * checksum parser
