@@ -20,6 +20,18 @@ $o->download("https://1fichier.com/?IIIIIIIDDDDDDDDD")
 
 ```
 
+### Remote API
+this example how to use remote api with Cookie enable download.
+```php
+$o->remote_request([
+https://1fichier.com/?AAAAA,
+https://1fichier.com/?AAAAAA
+],
+0, 
+["Cookie: AF=1919; show_cm=no; SID=llA5lA..........."]
+);
+```
+
 ### checksum check
 
 ```shell
