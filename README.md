@@ -1,8 +1,6 @@
 # 1fichier
 1fichier api for php
 
-initialize
-
 get from https://1fichier.com/console/params.pl and generate API KEY
 
 ```php
