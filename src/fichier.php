@@ -9,7 +9,13 @@ use GuzzleHttp\Exception\GuzzleException;
 
 class fichier
 {
+    /**
+     * @var Client
+     */
     private $client;
+    /**
+     * @var
+     */
     public $error;
 
     /**
@@ -27,6 +33,11 @@ class fichier
         ]);
     }
 
+    /**
+     * @param $json
+     * @param $uri
+     * @return bool|mixed
+     */
     public function request($json, $uri)
     {
         try {
@@ -40,6 +51,10 @@ class fichier
         return json_decode($response->getBody()->getContents(), true);
     }
 
+    /**
+     * @param $uri
+     * @return bool|mixed
+     */
     public function download($uri)
     {
         $json = [
@@ -49,6 +64,10 @@ class fichier
         return $this->request($json,"download/get_token.cgi");
     }
 
+    /**
+     * @param $folder_id
+     * @return bool|mixed
+     */
     public function file_ls($folder_id)
     {
         $json = [
@@ -58,6 +77,10 @@ class fichier
         return $this->request($json, "file/ls.cgi");
     }
 
+    /**
+     * @param $url
+     * @return bool|mixed
+     */
     public function file_info($url)
     {
         $json = [
@@ -67,6 +90,10 @@ class fichier
         return $this->request($json, "file/info.cgi");
     }
 
+    /**
+     * @param $url
+     * @return bool|mixed
+     */
     public function av_scan($url)
     {
         $json = [
@@ -76,6 +103,10 @@ class fichier
         return $this->request($json, "file/scan.cgi");
     }
 
+    /**
+     * @param $url
+     * @return bool|mixed
+     */
     public function file_rm($url)
     {
         $json = [
@@ -84,6 +115,11 @@ class fichier
         return $this->request($json, "file/rm.cgi");
     }
 
+    /**
+     * @param $urls
+     * @param $folder_id
+     * @return bool|mixed
+     */
     public function file_mv($urls, $folder_id)
     {
         if(!is_array($urls)){
@@ -98,6 +134,11 @@ class fichier
         return $this->request($json, "file/mv.cgi");
     }
 
+    /**
+     * @param $urls
+     * @param $folder_id
+     * @return bool|mixed
+     */
     public function file_cp($urls, $folder_id)
     {
         if(!is_array($urls)){
@@ -112,6 +153,10 @@ class fichier
         return $this->request($json, "file/cp.cgi");
     }
 
+    /**
+     * @param $folder_id
+     * @return bool|mixed
+     */
     public function folder_ls($folder_id)
     {
         $json = [
@@ -121,6 +166,12 @@ class fichier
         return $this->request($json, "folder/ls.cgi");
     }
 
+    /**
+     * @param $name
+     * @param bool $folder_id
+     * @param bool $sharing_user
+     * @return bool|mixed
+     */
     public function mkdir($name, $folder_id = false, $sharing_user = false)
     {
         $json = [
@@ -136,6 +187,13 @@ class fichier
         return $this->request($json, "folder/mkdir.cgi");
     }
 
+    /**
+     * @param $folder_id
+     * @param int $share
+     * @param bool $pass
+     * @param bool $shares
+     * @return bool|mixed
+     */
     public function folder_share($folder_id, $share = 0, $pass = false, $shares = false)
     {
         $json = [
@@ -152,6 +210,13 @@ class fichier
         return $this->request($json, "folder/share.cgi");
     }
 
+    /**
+     * @param $email
+     * @param int $rw
+     * @param int $hide_links
+     * @param bool $add_array
+     * @return array
+     */
     public function folder_share_gen($email, $rw = 0, $hide_links = 0, $add_array = false)
     {
         $json = [
@@ -166,6 +231,12 @@ class fichier
         return $array;
     }
 
+    /**
+     * @param $folder_id
+     * @param $destination_folder_id
+     * @param bool $destination_user
+     * @return bool|mixed
+     */
     public function folder_mv($folder_id, $destination_folder_id, $destination_user = false)
     {
         $json = [
@@ -178,6 +249,10 @@ class fichier
         return $this->request($json, "folder/mv.cgi");
     }
 
+    /**
+     * @param $folder_id
+     * @return bool|mixed
+     */
     public function folder_rm($folder_id)
     {
         $json = [
