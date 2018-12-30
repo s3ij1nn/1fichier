@@ -1,8 +1,6 @@
 # 1fichier
 1fichier api for php
 
-initialize
-
 get from https://1fichier.com/console/params.pl and generate API KEY
 
 ```php
@@ -18,6 +16,18 @@ $o->folder_ls(0)
 // Get direct download link (Premium, Access, CDN)
 $o->download("https://1fichier.com/?IIIIIIIDDDDDDDDD")
 
+```
+
+### Remote API
+this example how to use remote api with Cookie enable download.
+```php
+$o->remote_request([
+https://1fichier.com/?AAAAA,
+https://1fichier.com/?AAAAAA
+],
+0, 
+["Cookie: AF=1919; show_cm=no; SID=llA5lA..........."]
+);
 ```
 
 ### checksum check
