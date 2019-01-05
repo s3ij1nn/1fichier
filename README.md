@@ -32,10 +32,23 @@ https://1fichier.com/?AAAAAA
 
 ### checksum check
 
+#### single file
+
+**WARNING**
+
+php hash whirlpool is not same hash. use openssl.
+```php
+// bad coding
+$hash !== hash('whirlpool', 'anyfile');
+// use this
+preg_match('|\s(.*)$|', exec('openssl dgst -whirlpool anyfile'), $p);
+$hash === $p[1];
+```
+
+#### multi file
 ```shell
 $ openssl dgst -whirlpool * > all.checksum
 ```
-
 ```php
 $o->checksum_parser("all.checksum") fullpath or __DIR__ / all.checksum
 [
