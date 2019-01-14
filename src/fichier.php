@@ -104,14 +104,25 @@ class fichier
     }
 
     /**
-     * @param $url
+     * @param $urls
      * @return bool|mixed
      */
-    public function file_rm($url)
+    public function file_rm($urls)
     {
-        $json = [
-            "url"   =>  $url
-        ];
+        if(is_array($urls)){
+            foreach($urls as $url){
+                $files []= array("url"   =>  $url);
+            }
+        }else{
+            $files []= array("url"  =>  $urls);
+        }
+        if (!empty($files)) {
+            $json = [
+                "files"   =>  $files
+            ];
+        }else{
+            return false;
+        }
         return $this->request($json, "file/rm.cgi");
     }
 
