@@ -384,6 +384,10 @@ class fichier
      */
     public function checksum_check($filename, $folder_id, $verbose = false){
         $files = $this->file_ls($folder_id)["items"];
+        if(!$files){
+            $this->error = "checksum_check: folder_id is notfound or connection error";
+            return false;
+        }
         $checksums = $this->checksum_parser($filename);
 
         $errors = [];
