@@ -52,8 +52,8 @@ $ openssl dgst -whirlpool * > all.checksum
 ```php
 $o->checksum_parser("all.checksum") fullpath or __DIR__ / all.checksum
 [
-  ["filename", "hash"],
-  ["filename", "hash"],
+  "hash" => "filename",
+  "hash" => "filename",
     ...
 ]
 
@@ -64,8 +64,15 @@ NOT upload_after_create_file.txt
 
 $o->checksum_check("/tmp/all.checksum", 114514);
 [
-  ["upload_after_create_file.txt", "whirlpoolHASH"]
+  "hash" => "filename",
 ]
+
+// successful upload list.
+$o->checksum_diff("/tmp/all.checksum", 114514);
+[
+  "hash" => "filename",
+]
+
 ```
 
 ### Run on CLI
