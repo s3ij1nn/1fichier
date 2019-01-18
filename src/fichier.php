@@ -357,12 +357,13 @@ class fichier
         }
         $body = file_get_contents($filename);
         $checksums = array_values(array_filter(explode("\n", $body), "strlen"));
+        $parser = [];
         foreach($checksums as $id => $checksum){
             preg_match('|whirlpool\(([^)]*)\)= (.*)$|', $checksum, $match);
-            $checksums[$id] = [$match[1], $match[2]];
+            $parser[$match[2]] = $match[1];
         }
 
-        return $checksums;
+        return $parser;
     }
 
     /**
@@ -392,22 +393,22 @@ class fichier
 
         $errors = [];
 
-        foreach($checksums as $checksum){
+        foreach($checksums as $checksum => $name){
 
             $bool = false;
             foreach($files as $file){
-                if($file["checksum"] === $checksum[1]){
+                if($file["checksum"] === $checksum){
                     $bool = true;
                 }
             }
             if(!$bool){
-                $errors []= $checksum;
+                $errors[$checksum] = $name;
                 if($verbose){
-                    echo "NOT " . $checksum[0] . "\n";
+                    echo "NOT " . $name . "\n";
                 }
             }else{
                 if($verbose){
-                    echo "OK  " . $checksum[0] . "\n";
+                    echo "OK  " . $name . "\n";
                 }
             }
         }
@@ -416,5 +417,14 @@ class fichier
         }else{
             return $errors;
         }
+    }
+
+    /**
+     * @param $checksum_path
+     * @param $folder_id
+     * @return array
+     */
+    public function checksum_diff($checksum_path, $folder_id){
+        return array_diff($this->checksum_parser($checksum_path), $this->checksum_check($checksum_path, $folder_id));
     }
 }
