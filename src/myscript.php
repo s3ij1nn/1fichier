@@ -9,7 +9,7 @@ class myscript extends fichier
 
   }
 
-  public function duplicate_delete($folder_id)
+  public function duplicate_delete($folder_id, $bach_mode = false)
   {
     foreach($this->parent->file_ls($folder_id) ["items"] as $video)
     {
@@ -23,9 +23,11 @@ class myscript extends fichier
 
         if ($s_video["filename"] === $video["filename"] AND $s_video["checksum"] === $video["checksum"])
         {
-          echo "duplicate found " . $video["filename"] . "\n";
-          echo $s_video["url"] . "\n";
-          echo $video["url"] . " .... deleting \n";
+          if(!$batch_mode){
+            echo "duplicate found " . $video["filename"] . "\n";
+            echo $s_video["url"] . "\n";
+            echo $video["url"] . " .... deleting \n";
+          }
           $this->parent->file_rm($video["url"]);
         }
       }
