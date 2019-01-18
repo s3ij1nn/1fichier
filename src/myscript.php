@@ -4,19 +4,16 @@ namespace onefichier;
 
 class myscript extends fichier
 {
-    public $parent;
-
     public function __construct($token)
     {
-        $this->parent = parent::__construct($token);
-
+        parent::__construct($token);
     }
 
     public function duplicate_delete($folder_id, $batch_mode = false)
     {
-        foreach($this->parent->file_ls($folder_id) ["items"] as $video)
+        foreach(parent::file_ls($folder_id) ["items"] as $video)
         {
-            foreach($this->parent->file_ls($folder_id) ["items"] as $s_video)
+            foreach(parent::file_ls($folder_id) ["items"] as $s_video)
             {
                 if ($video["url"] === $s_video["url"])
                 {
@@ -30,7 +27,7 @@ class myscript extends fichier
                         echo $s_video["url"] . "\n";
                         echo $video["url"] . " .... deleting \n";
                     }
-                    $this->parent->file_rm($video["url"]);
+                    parent::file_rm($video["url"]);
                 }
             }
         }
