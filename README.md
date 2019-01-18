@@ -115,3 +115,23 @@ Return:
   array|bool 
 
 ```
+
+## myscript
+```
+$ curl -sS https://getcomposer.org/installer | php
+
+$ php composer.phar require psy/psysh
+$ php composer.phar install
+
+$ vendor/bin/psysh vendor/autoload.php
+
+Psy Shell v?.?.? (PHP ?.?.? — cli) by Justin Hileman
+>>> $o = new \onefichier\myscript("API_KEY");
+>>> $o->parent->folder_ls(0)
+>>> $folder_id = 114514;
+>>> $o->duplicate_delete($folder_id)
+duplicate found filename************
+https://1fichier.com/?********************
+https://1fichier.com/?******************** .... deleting 
+...
+```
