@@ -4,33 +4,35 @@ namespace onefichier;
 
 class myscript extends fichier
 {
-  public function __construct($token){
-    $this->parent = new parent($token);
+    public $parent;
 
-  }
-
-  public function duplicate_delete($folder_id, $bach_mode = false)
-  {
-    foreach($this->parent->file_ls($folder_id) ["items"] as $video)
+    public function __construct($token)
     {
-      $checksum = $video["checksum"];
-      foreach($this->parent->file_ls($folder_id) ["items"] as $s_video)
-      {
-        if ($video["url"] === $s_video["url"])
-        {
-          continue;
-        }
+        $this->parent = parent::__construct($token);
 
-        if ($s_video["filename"] === $video["filename"] AND $s_video["checksum"] === $video["checksum"])
-        {
-          if(!$batch_mode){
-            echo "duplicate found " . $video["filename"] . "\n";
-            echo $s_video["url"] . "\n";
-            echo $video["url"] . " .... deleting \n";
-          }
-          $this->parent->file_rm($video["url"]);
-        }
-      }
     }
-  }
+
+    public function duplicate_delete($folder_id, $batch_mode = false)
+    {
+        foreach($this->parent->file_ls($folder_id) ["items"] as $video)
+        {
+            foreach($this->parent->file_ls($folder_id) ["items"] as $s_video)
+            {
+                if ($video["url"] === $s_video["url"])
+                {
+                    continue;
+                }
+
+                if ($s_video["filename"] === $video["filename"] AND $s_video["checksum"] === $video["checksum"])
+                {
+                    if(!$batch_mode){
+                        echo "duplicate found " . $video["filename"] . "\n";
+                        echo $s_video["url"] . "\n";
+                        echo $video["url"] . " .... deleting \n";
+                    }
+                    $this->parent->file_rm($video["url"]);
+                }
+            }
+        }
+    }
 }
