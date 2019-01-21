@@ -79,7 +79,7 @@ class myscript extends fichier
                         if($notfound){
                             echo $filename. " is not found. \n";
                         }else{
-                            echo $filename. ".... delete \n";
+                            echo $filename. " .... delete \n";
                         }
                     }
                     if(!$notfound){
