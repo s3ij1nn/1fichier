@@ -141,4 +141,11 @@ duplicate found filename************
 https://1fichier.com/?********************
 https://1fichier.com/?******************** .... deleting 
 ...
+
+// same file name, not same checksum file delete.
+>>> $o->upload_fail_delete('/tmp/checksum.checksum', 114514)
+https://1fichier.com/?0d4a5lbk385zevg023mt
+local :19047f88...a2db041fa8066fae8c385f21b4ff4bc3
+remote:ksdflakj...4184d5cd5a4da5120d1869edb00e71eb.... delete
+...
 ```
