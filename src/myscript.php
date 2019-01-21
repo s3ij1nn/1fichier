@@ -57,7 +57,7 @@ class myscript extends fichier
     {
         foreach (parent::checksum_parser($checksum_path) as $checksum => $filename)
         {
-            foreach(parent::file_ls($folder_id) as $file)
+            foreach(parent::file_ls($folder_id)["items"] as $file)
             {
                 if(basename($filename) === $file["filename"] AND $checksum === $file["checksum"])
                 {
