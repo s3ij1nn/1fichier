@@ -4,6 +4,10 @@ namespace onefichier;
 
 class myscript extends fichier
 {
+    /**
+     * myscript constructor.
+     * @param $token
+     */
     public function __construct($token)
     {
         parent::__construct($token);
@@ -11,9 +15,9 @@ class myscript extends fichier
 
     public function duplicate_delete($folder_id, $batch_mode = false)
     {
-        foreach(parent::file_ls($folder_id) ["items"] as $video)
+        foreach($this->file_ls($folder_id) ["items"] as $video)
         {
-            foreach(parent::file_ls($folder_id) ["items"] as $s_video)
+            foreach($this->file_ls($folder_id) ["items"] as $s_video)
             {
                 if ($video["url"] === $s_video["url"])
                 {
@@ -27,7 +31,7 @@ class myscript extends fichier
                         echo $s_video["url"] . "\n";
                         echo $video["url"] . " .... deleting \n";
                     }
-                    parent::file_rm($video["url"]);
+                    $this->file_rm($video["url"]);
                 }
             }
         }
@@ -35,9 +39,9 @@ class myscript extends fichier
 
     public function upload_fail_delete($checksum_path, $folder_id, $batch_mode = false)
     {
-        foreach(parent::checksum_parser($checksum_path) as $checksum => $filename)
+        foreach($this->checksum_parser($checksum_path) as $checksum => $filename)
         {
-            foreach(parent::file_ls($folder_id) ["items"] as $file)
+            foreach($this->file_ls($folder_id) ["items"] as $file)
             {
                 if ($file["filename"] === basename($filename))
                 {
@@ -46,7 +50,7 @@ class myscript extends fichier
                         if(!$batch_mode){
                             echo $file["url"] . "\n" . "local :" . $checksum . "\n" . "remote:" . $file["checksum"] . ".... delete\n";
                         }
-                        parent::file_rm($file["url"]);
+                        $this->file_rm($file["url"]);
                     }
                 }
             }
@@ -55,9 +59,9 @@ class myscript extends fichier
 
     public function upload_success_delete($checksum_path, $folder_id, $directory = false, $batch_mode = false)
     {
-        foreach (parent::checksum_parser($checksum_path) as $checksum => $filename)
+        foreach ($this->checksum_parser($checksum_path) as $checksum => $filename)
         {
-            foreach(parent::file_ls($folder_id)["items"] as $file)
+            foreach($this->file_ls($folder_id)["items"] as $file)
             {
                 if(basename($filename) === $file["filename"] AND $checksum === $file["checksum"])
                 {
