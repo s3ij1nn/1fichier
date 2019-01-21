@@ -32,4 +32,24 @@ class myscript extends fichier
             }
         }
     }
+
+    public function upload_fail_delete($checksum_path, $folder_id, $batch_mode = false)
+    {
+        foreach(parent::checksum_parser($checksum_path) as $checksum => $filename)
+        {
+            foreach(parent::file_ls($folder_id) ["items"] as $file)
+            {
+                if ($file["filename"] === $filename)
+                {
+                    if ($file["checksum"] != $checksum)
+                    {
+                        if(!$batch_mode){
+                            echo $file["url"] . "\n" . "local :" . $checksum . "\n" . "remote:" . $file["checksum"] . ".... delete\n";
+                        }
+                        parent::file_rm($file["url"]);
+                    }
+                }
+            }
+        }
+    }
 }
