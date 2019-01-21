@@ -39,7 +39,7 @@ class myscript extends fichier
         {
             foreach(parent::file_ls($folder_id) ["items"] as $file)
             {
-                if ($file["filename"] === $filename)
+                if ($file["filename"] === basename($filename))
                 {
                     if ($file["checksum"] != $checksum)
                     {
@@ -51,5 +51,40 @@ class myscript extends fichier
                 }
             }
         }
+    }
+
+    public function upload_success_delete($checksum_path, $folder_id, $directory = false, $batch_mode = false)
+    {
+        foreach (parent::checksum_parser($checksum_path) as $checksum => $filename)
+        {
+            foreach(parent::file_ls($folder_id) as $file)
+            {
+                if(basename($filename) === $file["filename"] AND $checksum === $file["checksum"])
+                {
+                    $notfound = false;
+                    if(! is_file($filename)){
+                        unlink($filename);
+                        if(is_file($directory.basename($filename))){
+                            $filename = $directory.basename($filename);
+                        }elseif(is_file($directory.$filename)){
+                            $filename = $directory.$filename;
+                        }else{
+                            $notfound = true;
+                        }
+                    }
+                    if(!$batch_mode){
+                        if($notfound){
+                            echo $filename. " is not found. \n";
+                        }else{
+                            echo $filename. ".... delete \n";
+                        }
+                    }
+                    if(!$notfound){
+                        unlink($filename);
+                    }
+                }
+            }
+        }
+
     }
 }
