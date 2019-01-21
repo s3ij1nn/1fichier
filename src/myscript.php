@@ -67,7 +67,6 @@ class myscript extends fichier
                 {
                     $notfound = false;
                     if(! is_file($filename)){
-                        unlink($filename);
                         if(is_file($directory.basename($filename))){
                             $filename = $directory.basename($filename);
                         }elseif(is_file($directory.$filename)){
