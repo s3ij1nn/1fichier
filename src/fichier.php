@@ -359,8 +359,9 @@ class fichier
         $checksums = array_values(array_filter(explode("\n", $body), "strlen"));
         $parser = [];
         foreach($checksums as $id => $checksum){
-            preg_match('|whirlpool\(([^)]*)\)= (.*)$|', $checksum, $match);
-            $parser[$match[2]] = $match[1];
+            if(preg_match('|whirlpool\(([^)]*)\)= (.*)$|', $checksum, $match)){
+                $parser[$match[2]] = $match[1];
+            }
         }
 
         return $parser;
