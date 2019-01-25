@@ -414,7 +414,7 @@ class fichier
             }
         }
         if(empty($errors)){
-            return true;
+            return [];
         }else{
             return $errors;
         }
