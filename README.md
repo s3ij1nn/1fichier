@@ -1,6 +1,9 @@
 # 1fichier
 1fichier api for php
 
+wiki ... will update ... If I have time.
+https://github.com/s3ij1nn/1fichier/wiki
+
 get from https://1fichier.com/console/params.pl and generate API KEY
 
 ```php
