@@ -26,6 +26,7 @@ class fichier
     {
         $this->client = new Client([
             'base_uri' => 'https://api.1fichier.com/v1/',
+            'http_errors' => false,
             'headers' => [
                 'Accept'        => 'application/json',
                 'Authorization' => 'Bearer ' . $token,
