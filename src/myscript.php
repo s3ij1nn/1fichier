@@ -90,4 +90,16 @@ class myscript extends fichier
         }
 
     }
+
+    public function upload_success_rename($checksum_path, $folder_id)
+    {
+        foreach($this->checksum_parser($checksum_path) as $checksum => $filename)
+        {
+            foreach($this->file_ls($folder_id)["items"] as $file){
+                if(($file["checksum"] === $checksum) AND !($filename === $file["filename"])){
+                    $this->file_rn($file["url"], $filename);
+                }
+            }
+        }
+    }
 }
