@@ -165,6 +165,16 @@ class fichier
         return $this->request($json, "file/cp.cgi");
     }
 
+    public function file_rn($url, $filename)
+    {
+        $json = [
+            "pretty"    =>  1,
+            "urls"      =>  [$url],
+            "filename"  =>  $filename
+        ];
+        return $this->request($json, "file/chattr.cgi");
+    }
+
     /**
      * @param $folder_id
      * @return bool|mixed
