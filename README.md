@@ -139,7 +139,8 @@ Psy Shell v?.?.? (PHP ?.?.? — cli) by Justin Hileman
 >>> $o = new \onefichier\myscript("API_KEY");
 >>> $o->parent->folder_ls(0)
 >>> $folder_id = 114514;
-// same file name, same checksum will delete 
+// same file name, same checksum will delete
+// ** like rclone dedupe ** 
 >>> $o->duplicate_delete($folder_id)
 duplicate found filename************
 https://1fichier.com/?********************
