@@ -139,6 +139,7 @@ Psy Shell v?.?.? (PHP ?.?.? — cli) by Justin Hileman
 >>> $o = new \onefichier\myscript("API_KEY");
 >>> $o->parent->folder_ls(0)
 >>> $folder_id = 114514;
+
 // same file name, same checksum will delete
 // ** like rclone dedupe ** 
 >>> $o->duplicate_delete($folder_id)
@@ -147,10 +148,17 @@ https://1fichier.com/?********************
 https://1fichier.com/?******************** .... deleting 
 ...
 
-// same file name, not same checksum file delete.
+// Compare local and remote hashes, and if they are different, delete the remote file
 >>> $o->upload_fail_delete('/tmp/checksum.checksum', 114514)
 https://1fichier.com/?0d4a5lbk385zevg023mt
 local :19047f88...a2db041fa8066fae8c385f21b4ff4bc3
 remote:ksdflakj...4184d5cd5a4da5120d1869edb00e71eb.... delete
 ...
+
+// Compare local and remote hashes, and if they are not different, delete the local file
+// if not found on local file. skip.
+>>> $o->upload_success_delete
+
+// Compare local and remote hashes, and if they are not different, But different on filename, rename from local filename.
+>>> $o->upload_success_rename
 ```
