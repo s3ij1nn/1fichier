@@ -29,7 +29,7 @@ class fichier
             'http_errors' => false,
             'headers' => [
                 'Accept'        => 'application/json',
-                'Authorization' => 'Bearer ' . $token,
+                'Authorization' => 'Bearer ' . $token
             ]
         ]);
     }
@@ -173,6 +173,49 @@ class fichier
             "filename"  =>  $filename
         ];
         return $this->request($json, "file/chattr.cgi");
+    }
+
+    public function upload_token()
+    {
+        $json = [
+            "pretty"    =>  1
+        ];
+        return $this->request($json, "upload/get_upload_server.cgi");
+    }
+
+    public function upload_file($filepath, $to = 0, $domain = 0)
+    {
+        $server = $this->upload_token();
+        try {
+            $response = $this->client->request('POST', "https://" . $server["url"] . "/upload.cgi?id=" . $server["id"], [
+                'multipart' => [
+                    [
+                        'name' => "file[]",
+                        'contents' => fopen($filepath, 'r'),
+                        'did' => $to,
+                        'domain' => $domain
+                    ]
+                ]
+            ]);
+        } catch (GuzzleException $e) {
+            $this->error = $e;
+            return false;
+        }
+        $body = $response->getBody()->getContents();
+        if(! preg_match('|Upload finished|', $body)){
+            return false;
+        }
+        try {
+            $response = $this->client->request('POST', "https://" . $server["url"] . "/end.pl?xid=" . $server["id"], [
+                'headers' => [
+                    "JSON" => 1
+                ]
+            ]);
+        } catch (GuzzleException $e) {
+            $this->error    =   $e;
+            return false;
+        }
+        return json_decode($response->getBody()->getContents(), true);
     }
 
     /**
